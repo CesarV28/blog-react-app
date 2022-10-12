@@ -19,7 +19,11 @@ export const Navbar = () => {
 
   return (
     <div className="navbar">
-        <div className="navbar__logo"><Link to={'/blog/home'}>Cesar</Link></div>
+        <div className="navbar__logo">
+          <Link to={'/blog/home'}>
+              <img className='navbar__logo-img' src="https://www.logolynx.com/images/logolynx/36/362087235008be84086f892df697f50d.png" alt="" />
+          </Link>
+        </div>
         <header className="navbar__header">
           <Link to={'/blog/?category=art'} className="navbar__header-link">art</Link>
           <Link to={'/blog/?category=science'} className="navbar__header-link">science</Link>

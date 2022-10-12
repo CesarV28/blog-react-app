@@ -69,6 +69,14 @@
     flex-direction: row;
     padding: 1.5rem 4rem;
 
+    &__logo{
+        
+        &-img{
+            width: 45px;
+            height: 45px;
+        }
+    }
+
     &__header{
         display: flex;
         align-items: center;

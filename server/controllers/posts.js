@@ -5,25 +5,25 @@ const { User } = require("../models/user");
 
 const postsGet = async( req = request, res) => {
 
-    const {category} = req.query
-
+    const {category} = req.query;
+ 
     try {
         
         // if there is a category
-        if( category ) {
-            const posts  = await Post.findAll({
-                where:{
-                    category
-                },
-                include: [{
-                    model: User,
-                    attributes: { exclude: ['password'] }
-                }]
-            });
-            return res.json({
-                posts
-            });
-        }
+        // if( category ) {
+        //     const posts  = await Post.findAll({
+        //         where:{
+        //             category
+        //         },
+        //         include: [{
+        //             model: User,
+        //             attributes: { exclude: ['password'] }
+        //         }]
+        //     });
+        //     return res.json({
+        //         posts
+        //     });
+        // }
         
         // if there isn't
         const posts  = await Post.findAll({

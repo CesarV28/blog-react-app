@@ -30,7 +30,7 @@ export const usePostStore = () => {
             
             dispatch( onLoading(true) );
             const { data } = await blogApi.get('/posts');
-            await getImagePost()
+            // await getImagePost()
             const { posts } = data;
             dispatch( onGetPots( posts ) );
         } catch (error) {
