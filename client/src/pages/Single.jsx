@@ -6,11 +6,12 @@ import { usePostStore } from "../hooks";
 
 export const Single = () => {
 
+  const {startSettingCurrentPost} = usePostStore();  
+
   const { curretPost } = useSelector( state => state.post );
+  const { status } = useSelector( state => state.auth );
 
   const { id, title, desc, img, date, user, category } = curretPost;
-
-  const {startSettingCurrentPost} = usePostStore();  
 
   const description = trasformText(desc).split('.');
 
@@ -24,16 +25,18 @@ export const Single = () => {
             <span className="content__user-name">{ user?.username}</span>
             <p className="content__user-published">{ date }</p>
           </div>
-          <div className="content__user-edit">
-            <Link 
-              className="content__user-edit--edit" 
-              to={`/blog/write/${id}`}
-              onClick={() => startSettingCurrentPost({ ...curretPost })}
-            >
-              <i className="fa-solid fa-pen-to-square"></i>
-            </Link>
-            <Link className="content__user-edit--delete"><i className="fa-solid fa-trash"></i></Link>
-          </div>
+          { status === 'authenticated' &&
+            <div className="content__user-edit">
+              <Link 
+                className="content__user-edit--edit" 
+                to={`/blog/write/${id}`}
+                onClick={() => startSettingCurrentPost({ ...curretPost })}
+              >
+                <i className="fa-solid fa-pen-to-square"></i>
+              </Link>
+              <Link className="content__user-edit--delete"><i className="fa-solid fa-trash"></i></Link>
+            </div>
+          }
         </div>
         
         <div className="content__info">

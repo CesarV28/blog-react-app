@@ -12,7 +12,7 @@ export const postSlice = createSlice({
         postStatus: 'Draft'
     },
     reducers: {
-        onGetPots: (state, { payload } ) => {
+        onGetPosts: (state, { payload } ) => {
             state.posts = payload;
             state.isLoading = false;
         },
@@ -36,7 +36,7 @@ export const postSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { 
-    onGetPots, 
+    onGetPosts, 
     onCreatePost, 
     onSaveImg, 
     onSetCuttentPost, 

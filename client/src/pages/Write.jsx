@@ -6,13 +6,15 @@ import { useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import { data } from '../api/api.example';
 import { trasformText } from '../helpers/trasformToHTML';
-import { useForm, usePostStore } from '../hooks';
+import { useAuthStore, useForm, usePostStore } from '../hooks';
 
 export const Write = () => {
 
   const { status } = useSelector( state => state.auth );
+  const { startLogout } = useAuthStore();
 
   if(status === 'not-authenticated'){
+    startLogout(' Sorry, you need to login or create an account ');
     return <Navigate to={'/auth/login'}/>
   }
 
@@ -25,13 +27,13 @@ export const Write = () => {
 
   const description = trasformText(desc);
 
-  const [value, setValue] = useState( !description ? '' : description);
-  
+  const [value, setValue] = useState( description );
+
   const [img, setImg] = useState('');
 
   const { formState, onInputChange } = useForm({
     title: title ?? '',
-    desc: desc ?? '',
+    desc: description ?? '',
     category: category && '',
     file: ''
   });  
@@ -66,7 +68,12 @@ export const Write = () => {
           onChange={ onInputChange }
         />
         <div className="content__editor">
-          <ReactQuill className="content__editor-editor" theme="snow" value={ value} onChange={setValue} />
+          <ReactQuill 
+            className="content__editor-editor" 
+            theme="snow" 
+            value={ value } 
+            onChange={setValue} 
+          />
         </div>
       </div>
       <div className="menu">

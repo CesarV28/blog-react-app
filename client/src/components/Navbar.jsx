@@ -25,12 +25,12 @@ export const Navbar = () => {
           </Link>
         </div>
         <header className="navbar__header">
-          <Link to={'/blog/?category=art'} className="navbar__header-link">art</Link>
-          <Link to={'/blog/?category=science'} className="navbar__header-link">science</Link>
-          <Link to={'/blog/?category=technology'} className="navbar__header-link">technology</Link>
-          <Link to={'/blog/?category=cinema'} className="navbar__header-link">cinema</Link>
-          <Link to={'/blog/?category=desing'} className="navbar__header-link">desing</Link>
-          <Link to={'/blog/?category=food'} className="navbar__header-link">food</Link>
+          <Link to={'/blog/home/?category=art'} className="navbar__header-link">art</Link>
+          <Link to={'/blog/home/?category=science'} className="navbar__header-link">science</Link>
+          <Link to={'/blog/home/?category=technology'} className="navbar__header-link">technology</Link>
+          <Link to={'/blog/home/?category=cinema'} className="navbar__header-link">cinema</Link>
+          <Link to={'/blog/home/?category=desing'} className="navbar__header-link">desing</Link>
+          <Link to={'/blog/home/?category=food'} className="navbar__header-link">food</Link>
           <span className="navbar__header-span">{ user && user?.username}</span>
           {
             status === 'not-authenticated'

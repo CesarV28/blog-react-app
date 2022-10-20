@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 // import { data } from "../api/api.example"
 import { trasformText } from "../helpers/trasformToHTML";
 import { usePostStore } from "../hooks";
 
 export const Home = () => {
+
+  const search = useLocation().search;
+  const category = new URLSearchParams(search).get('category');
 
   const { posts } = useSelector( state => state.post );
 
@@ -13,13 +16,19 @@ export const Home = () => {
 
   useEffect(() => {
 
-    startGettingPosts();
+    startGettingPosts(category);
 
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    startSettingCurrentPost({});
+  }, [])
+  
   
   const onCurrentPost = ( post ) => {
       startSettingCurrentPost( post );
   }
+
 
   return (
     <main className="home">

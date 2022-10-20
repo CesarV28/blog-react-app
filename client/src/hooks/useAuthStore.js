@@ -24,7 +24,7 @@ export const useAuthStore = () => {
             
             const { token, user } = data;
 
-            localStorage.setItem('token', token );
+            localStorage.setItem('x-token', token );
             localStorage.setItem('token-init-date', new Date().getTime() );
             dispatch( onLogin({ username: user.username, id: user.id, img: user.img }));
 
@@ -53,24 +53,24 @@ export const useAuthStore = () => {
         }
     }
 
-    // const startCheckAuthToken = async() => {
+    const startCheckAuthToken = async() => {
 
-    //     const token = localStorage.getItem('token');
-        
-    //     if( !!!token ){
-    //         return dispatch( onLogout() );
-    //     }
+        const token = localStorage.getItem('x-token');
+ 
+        if( !!!token ){
+            return dispatch( onLogout() );
+        }
 
-    //     try {
-    //         const { data } = await blogApi.get('/auth/renew');
-    //         localStorage.setItem( 'token', data.token );
-    //         localStorage.setItem('token-init-date', new Date().getTime() );
-    //         dispatch( onLogin({ name: data.name, uid: data.uid }));
-    //     } catch (error) {
-    //         localStorage.clear();
-    //         dispatch( onLogout());
-    //     }
-    // }
+        try {
+            const { data } = await blogApi.get('/auth/renew');
+            localStorage.setItem( 'x-token', data.token );
+            localStorage.setItem('token-init-date', new Date().getTime() );
+            dispatch( onLogin({ username: data.username, uid: data.uid }));
+        } catch (error) {
+            localStorage.clear();
+            dispatch( onLogout());
+        }
+    }
 
     const startLogout = ( message = '' ) => {
         localStorage.clear();
@@ -83,10 +83,11 @@ export const useAuthStore = () => {
         status, 
         user, 
         errorMessage,
+
         // Methos
         startLogin,
         startRegister,
-        // startCheckAuthToken,
+        startCheckAuthToken,
         startLogout,
     }
 }              

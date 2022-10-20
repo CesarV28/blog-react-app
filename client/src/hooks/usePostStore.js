@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import blogApi from "../api/blogApi";
 import { fileUpload } from "../helpers/fileUpload";
-import { getImagePost } from "../helpers/getImagePost";
 
 import { 
-    onGetPots, 
+    onGetPosts, 
     onSaveImg, 
     onCreatePost, 
     onSetCuttentPost, 
@@ -25,14 +23,20 @@ export const usePostStore = () => {
 
     const dispatch = useDispatch();
 
-    const startGettingPosts = async(  ) => {
+    const startGettingPosts = async( category ) => {
         try {
             
             dispatch( onLoading(true) );
             const { data } = await blogApi.get('/posts');
-            // await getImagePost()
             const { posts } = data;
-            dispatch( onGetPots( posts ) );
+
+            if( category ){
+                const postsByCategory = posts.filter( post => post.category === category );
+                dispatch( onGetPosts( postsByCategory ) );
+                return;
+            }
+
+            dispatch( onGetPosts( posts ) );
         } catch (error) {
             console.log(error);
             dispatch( onLoading(true) );

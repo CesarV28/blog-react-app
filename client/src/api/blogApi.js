@@ -9,10 +9,10 @@ const blogApi = axios.create({
 
 blogApi.interceptors.request.use( config => {
     config.headers = {
-
         ...config.headers,
-        'x-token': localStorage.getItem('token')
+        'x-token': localStorage.getItem('x-token')
     }
+
     return config;
 })
 

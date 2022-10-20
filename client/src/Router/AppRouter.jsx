@@ -12,15 +12,17 @@ import {
 } from '../pages';
 
 export const AppRouter = () => {
+
   return (
     <Routes>
-        <Route path='/*' element={ <AuthLayout/>}/>
-        <Route path='/auth'>
+  
+        <Route path='/auth' element={<AuthLayout/>}>
           <Route path='register' element={ <Register/> }/>
+          <Route index element={ <Login/> }/>
           <Route path='login' element={ <Login/> }/>
         </Route>
         <Route path='/blog' element={<BlogLayout/>}>
-            <Route path='*' element={ <Home/> }/>
+            <Route index element={ <Home/> }/>
             <Route path='home' element={ <Home/> }/>
             <Route path='post/:id' element={ <Single/> }/>
             <Route path='write' element={ <Write/> }>
