@@ -68,7 +68,7 @@ const authLogin = async( req, res) => {
         }
 
         // Generate JWT
-        const token = await generateJWT( user.id );
+        const token = await generateJWT( user.id, user.username );
     
         res.status(200).json({
             user: {
@@ -94,9 +94,37 @@ const authLogout = ( req, res) => {
     })
 }
 
+const revalidateToken = async( req, res ) => {
+    
+    const { uid, username } = req;
+
+    console.log({ uid, username })
+
+    try {
+
+        const token = await generateJWT( uid, username );
+
+        res.status(200).json({
+            user: {
+                uid, 
+                username,
+            },
+            token
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Por favor hable con el adminsitrador',
+        });
+    }
+}
+
 
 module.exports = {
     authRegister,
     authLogin,
     authLogout,
+    revalidateToken
 }

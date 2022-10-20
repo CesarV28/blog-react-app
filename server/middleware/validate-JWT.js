@@ -6,7 +6,7 @@ const { User } = require('../models/user');
 const validateJWT = async ( req = request, res = response, next ) => {
 
     const token = req.header('x-token');
-
+    console.log(token)
     if(!token) {
         return res.status(401).json({
             msg: 'No hay TOKEN en la peticion'
@@ -30,8 +30,10 @@ const validateJWT = async ( req = request, res = response, next ) => {
             });
         }
 
-        req.user = user;
-
+      
+        req.uid = user.id, 
+        req.username = user.username
+        
         next();
 
     } catch (error) {

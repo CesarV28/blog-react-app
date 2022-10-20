@@ -4,12 +4,14 @@ const { check } = require('express-validator');
 const { 
     authRegister,
     authLogin,
-    authLogout
+    authLogout,
+    revalidateToken
 } = require('../controllers/auth');
 
 const { emailExists } = require('../helpers/db-validators');
 
 const { fieldsValidator } = require('../middleware/fields-validator');
+const { validateJWT } = require('../middleware/validate-JWT');
 
 const router = Router();
 
@@ -29,7 +31,9 @@ router.post('/login', [
 
 router.post('/logout', authLogout);
 
-
+router.get('/renew', [
+    validateJWT
+], revalidateToken);
 
 
 module.exports = router;
