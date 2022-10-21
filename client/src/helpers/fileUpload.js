@@ -3,7 +3,6 @@ import blogApi from "../api/blogApi";
  
  export const fileUpload = async( file ) => {
 
-    console.log(file)
     const img = new FormData();
     img.append('fileName', file[0]);
     

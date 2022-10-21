@@ -114,10 +114,10 @@ const postsPut = async( req, res) => {
 const postsPost = async( req, res) => {
 
     const postData = req.body;
-    const { id } = req.user;
+    const { uid } = req.uid;
 
     data = { 
-        userId: id, 
+        userId: uid, 
         date: new Date(),
         ...postData
     };

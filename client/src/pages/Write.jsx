@@ -34,7 +34,7 @@ export const Write = () => {
   const { formState, onInputChange } = useForm({
     title: title ?? '',
     desc: description ?? '',
-    category: category && '',
+    category: category ?? '',
     file: ''
   });  
 
@@ -102,17 +102,17 @@ export const Write = () => {
           <div className="menu__item">
 
             <h2 className="menu__item-title">Category</h2>
-            {data.length !== 0 && data.map( PostCategory => (
-              <div className="menu__item-radio" key={PostCategory.id}>
+            {data.length !== 0 && data.map( postCategory => (
+              <div className="menu__item-radio" key={postCategory.id}>
                 <input 
                   type="radio" 
                   name='category' 
-                  value={ PostCategory.title} 
-                  id={ PostCategory.id}
+                  value={ postCategory.title} 
+                  id={ postCategory.id}
                   onChange={ onInputChange }
-                  checked={ PostCategory.title === category ? true : false }
+                  checked={ postCategory.categoty === category ? true : undefined }
                 />
-                <label htmlFor={PostCategory.title}>{PostCategory.title}</label>
+                <label htmlFor={postCategory.title}>{postCategory.title}</label>
               </div>
             ))}
           </div>
